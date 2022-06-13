@@ -1,0 +1,37 @@
+package de.hitselikez.cmd;
+
+import de.hitselikez.main.Main;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class Trash implements CommandExecutor {
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String string, String[] args) {
+
+        Player p = (Player) sender;
+
+        if (args.length == 0) {
+
+            if (p.hasPermission("command.trash")) {
+
+                p.sendMessage(Main.sys + "Mülleimer geöffnet");
+                p.openInventory(Main.inv);
+                Main.inv.clear();
+
+            } else {
+
+                p.sendMessage(Main.noperms);
+
+            }
+
+        } else {
+
+            p.sendMessage(Main.sys + "Bitte nutze /trash");
+
+        }
+
+        return false;
+    }
+}
